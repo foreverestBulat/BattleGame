@@ -1,0 +1,27 @@
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: bash -c "uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload"
+    environment:
+      PYTHONPATH: /src
+      REDIS_URL: 'redis://redis:6379/0'
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+    restart: always
+
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
