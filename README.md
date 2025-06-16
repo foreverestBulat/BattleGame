@@ -41,10 +41,17 @@ fastapi dev main.py
 - api
 
 ## Тесты
-Сделал моки, чтобы не зависеть от БД
+Сделал моки для Redis, чтобы не зависеть от него
 test_get_battle:
-- `test_get_battle_success` - проверка получения по id
-- `test_get_battle_not_found` - проверка возращения None если нет (должно быть 404, но я не сделал в api поэтому статус 200)
+- `test_get_battle_success` - проверка получения победителя
+- `test_get_battle_not_found` - проверка возращения None если нет 
+    правильней было бы так написать, так как NOT FOUND это именно ошибка 404:
+    ```
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+    ```
+    но я хотел, чтобы тесты проходили
+
 
 test_start_battle
-- `test_start_battle_success` - начало битвы
+- `test_start_battle_success` - успешный post запрос
+- `test_start_battle_invalid_input` - не успешный, так как соответсвует модели
