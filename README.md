@@ -39,3 +39,12 @@ fastapi dev main.py
 - application - бизнес-логика
 - persistence - работа с бд (только redis)
 - api
+
+## Тесты
+Сделал моки, чтобы не зависеть от БД
+test_get_battle:
+- `test_get_battle_success` - проверка получения по id
+- `test_get_battle_not_found` - проверка возращения None если нет (должно быть 404, но я не сделал в api поэтому статус 200)
+
+test_start_battle
+- `test_start_battle_success` - начало битвы
